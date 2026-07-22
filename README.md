@@ -2,134 +2,145 @@
 ModeloEntidadRelacion
 
 
-Caso de Estudio: Sistema de Gestión para un Gimnasio.
-Contexto.
+Genera un Modelo Entidad-Relación (MER) profesional utilizando la notación de Chen para un Sistema de Gestión de un Gimnasio.
 
-El gimnasio "PowerFit Gym" ha crecido considerablemente y ya no puede administrar sus procesos mediante hojas de cálculo y registros en papel. La administración desea desarrollar un sistema que permita controlar la información de sus clientes, entrenadores, planes de entrenamiento, membresías y clases grupales.
+El diagrama debe parecer creado directamente en Draw.io (diagrams.net).
 
-Como desarrollador de software, tu tarea es diseñar la base de datos que soporte todas las operaciones del gimnasio.
+Características del diseño:
 
-Requerimientos.
+• Fondo completamente transparente.
+• Estilo vectorial limpio (SVG).
+• Sin sombras.
+• Sin degradados.
+• Sin efectos 3D.
+• Sin texturas.
+• Líneas rectas de color negro.
+• Bordes negros de grosor fino.
+• Todo perfectamente alineado.
+• Mucho espacio entre entidades para evitar cruces de líneas.
+• Calidad alta (4K).
 
-El gimnasio registra a todas las personas que desean convertirse en clientes.
+Utiliza los siguientes colores:
 
-De cada cliente se debe almacenar la siguiente información:
+- Entidades: Rectángulos azul claro.
+- Atributos: Óvalos verde claro.
+- Relaciones: Rombos amarillo claro.
+- Texto negro.
 
-Número de identificación.
-Nombre completo.
-Fecha de nacimiento.
-Género.
-Dirección.
-Teléfono.
-Correo electrónico.
-Fecha de inscripción.
+Subraya únicamente las llaves primarias.
 
-El gimnasio cuenta con varios entrenadores.
+Las cardinalidades deben mostrarse únicamente con:
 
-De cada entrenador se registra:
+1
+N
 
-Código.
-Nombre completo.
-Especialidad.
-Teléfono.
-Correo electrónico.
-Años de experiencia.
+Utiliza exclusivamente la notación de Chen.
 
-Cada cliente adquiere una membresía.
+No utilizar llaves foráneas (FK).
 
-De cada membresía se necesita registrar:
+No utilizar tablas del modelo relacional.
 
-Código.
-Tipo de membresía (Mensual, Trimestral, Semestral o Anual).
-Fecha de inicio.
-Fecha de vencimiento.
-Estado (Activa, Suspendida o Vencida).
-Valor pagado.
+Las entidades son:
 
-Un cliente puede adquirir varias membresías a lo largo del tiempo, pero solo una puede estar activa simultáneamente.
+ENTRENADOR
+- idEntrenador (PK)
+- nombre
+- apellido
+- especialidad
+- telefono
+- correo
+- añosExperiencia
 
-El gimnasio ofrece diferentes planes de entrenamiento.
+PLAN_ENTRENAMIENTO
+- idPlan (PK)
+- nombre
+- objetivo
+- nivel
+- duracionSemanas
 
-Cada plan contiene:
+CLIENTE
+- idCliente (PK)
+- documento
+- nombre
+- apellido
+- fechaNacimiento
+- genero
+- direccion
+- telefono
+- correo
+- fechaInscripcion
 
-Código.
-Nombre.
-Objetivo (Pérdida de peso, Hipertrofia, Resistencia, Rehabilitación, etc.).
-Nivel de dificultad.
-Duración en semanas.
+CLASE
+- idClase (PK)
+- nombre
+- cupoMaximo
+- duracion
+- horaInicio
+- horaFin
 
-Un entrenador puede diseñar varios planes.
+ASISTENCIA
+- idAsistencia (PK)
+- fecha
+- horaIngreso
+- estado
 
-Cada plan es diseñado únicamente por un entrenador.
+MEMBRESÍA
+- idMembresia (PK)
+- tipo
+- fechaInicio
+- fechaVencimiento
+- estado
+- valor
 
-Un cliente puede seguir un plan de entrenamiento.
+VENTA
+- idVenta (PK)
+- fecha
+- total
 
-Un mismo plan puede ser asignado a muchos clientes.
+DETALLE_VENTA
+- idDetalle (PK)
+- cantidad
+- precioUnitario
+- subtotal
 
-Además, el gimnasio ofrece clases grupales como:
+PRODUCTO
+- idProducto (PK)
+- nombre
+- marca
+- precio
+- stock
 
-Spinning.
-Yoga.
-CrossFit.
-Pilates.
-Funcional.
+Relaciones:
 
-De cada clase se registra:
+ENTRENADOR (1) DISEÑA (N) PLAN_ENTRENAMIENTO
 
-Código.
-Nombre.
-Cupo máximo.
-Duración.
-Hora de inicio.
-Hora de finalización.
+PLAN_ENTRENAMIENTO (1) ES SEGUIDO POR (N) CLIENTE
 
-Cada clase es dirigida por un entrenador.
+ENTRENADOR (1) DIRIGE (N) CLASE
 
-Un entrenador puede dirigir varias clases.
+CLIENTE (1) ADQUIERE (N) MEMBRESÍA
 
-Los clientes pueden inscribirse en varias clases.
+CLIENTE (1) REGISTRA (N) ASISTENCIA
 
-Cada clase puede tener muchos clientes inscritos, siempre que no se supere el cupo máximo.
+CLASE (1) TIENE (N) ASISTENCIA
 
-Para controlar la asistencia, cada vez que un cliente asiste a una clase se registra:
+CLIENTE (1) REALIZA (N) VENTA
 
-Fecha.
-Hora de ingreso.
-Estado de asistencia (Asistió o No asistió).
+VENTA (1) CONTIENE (N) DETALLE_VENTA
 
-El gimnasio también vende productos como:
+PRODUCTO (1) APARECE EN (N) DETALLE_VENTA
 
-Proteínas.
-Vitaminas.
-Guantes.
-Botellas.
-Camisetas.
+Distribución:
 
-De cada producto se almacena:
+Parte superior:
+ENTRENADOR -------- PLAN_ENTRENAMIENTO
 
-Código.
-Nombre.
-Marca.
-Precio.
-Stock disponible.
+Parte central:
+CLASE ------ ASISTENCIA ------ CLIENTE
 
-Cuando un cliente compra productos, el sistema registra:
+Parte inferior:
+VENTA ------ DETALLE_VENTA ------ PRODUCTO
 
-Número de venta.
-Fecha.
-Total pagado.
+MEMBRESÍA debe ubicarse debajo de CLIENTE.
 
-Una venta puede incluir varios productos.
-
-Un producto puede aparecer en muchas ventas diferentes.
-
-Información adicional
-
-El sistema debe permitir posteriormente:
-
-Consultar los clientes con membresía activa.
-Saber qué entrenador tiene más clientes asignados.
-Conocer qué clases tienen mayor asistencia.
-Identificar los productos más vendidos.
-Consultar el historial de membresías de un cliente.
-Ver el historial de compras realizadas por cada cliente.
+Todas las entidades deben estar perfectamente alineadas, con suficiente espacio para que ninguna línea se cruce.
