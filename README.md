@@ -8,7 +8,7 @@ El diagrama debe parecer creado directamente en Draw.io (diagrams.net).
 
 Características del diseño:
 
-• Fondo completamente transparente.
+•  Fondo completamente transparente.
 • Estilo vectorial limpio (SVG).
 • Sin sombras.
 • Sin degradados.
