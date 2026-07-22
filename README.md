@@ -1,2 +1,2 @@
-# BaseDeDatos---MER
+# BaseDeDatos - MER
 ModeloEntidadRelacion
